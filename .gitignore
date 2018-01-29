@@ -2,3 +2,4 @@
 rpc/haberdasher/*
 !rpc/haberdasher/service.proto
 out.pb
+vendor
