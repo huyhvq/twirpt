@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-twirpt
+spec:
+  ports:
+  - port: 80
+    targetPort: 9000
+    protocol: TCP
+    name: http
+  selector:
+    app: grpc-twirpt
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grpc-twirpt
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-twirpt
+    spec:
+      containers:
+      - name: esp
+        image: gcr.io/endpoints-release/endpoints-runtime:1
+        args: [
+          "-p", "9000",
+          "-a", "127.0.0.1:8080",
+          "-s", "twirpt.endpoints.huy-huynh-workaround.cloud.goog", # replace <YOUR_PROJECT_ID>
+          "-v", "2018-01-29r0", # e.g. "2017-03-30r0"
+        ]
+        ports:
+          - containerPort: 9000
+      - name: twirpt
+        image: gcr.io/huy-huynh-workaround/go-twirpt:1.0 # replace <YOUR_PROJECT_ID>
+        ports:
+          - containerPort: 8080
