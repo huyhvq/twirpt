@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "rpc/haberdasher/service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/twirp/huyhvq.twirpt.haberdasher.Haberdasher/MakeHat": {
+      "post": {
+        "summary": "MakeHat produces a hat of mysterious, randomly-selected color!",
+        "operationId": "MakeHat",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/haberdasherHat"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/haberdasherSize"
+            }
+          }
+        ],
+        "tags": [
+          "Haberdasher"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "haberdasherHat": {
+      "type": "object",
+      "properties": {
+        "inches": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "color": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "description": "A Hat is a piece of headwear made by a Haberdasher."
+    },
+    "haberdasherSize": {
+      "type": "object",
+      "properties": {
+        "inches": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "description": "Size of a Hat, in inches."
+    }
+  }
+}
